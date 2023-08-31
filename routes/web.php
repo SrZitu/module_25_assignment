@@ -22,9 +22,7 @@ use Illuminate\Database\Capsule\Manager;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 // Page Route
 Route::get('/userLogin', [UserController::class, 'userLoginPage']);
@@ -47,8 +45,6 @@ Route::get('/logout', [UserController::class, 'userLogout']);
 Route::get('/leaveRequestPage', [LeaveController::class, 'leaveRequestPage'])->middleware([TokenVerificationMiddleware::class]);
 Route::get('/allLeaveRequest', [LeaveController::class, 'allLeaveRequestShow'])->middleware([TokenVerificationMiddleware::class]);
 
-// Leave report page
-// Route::get('/eployeeLeaveReport', [LeaveController::class, 'eployeeLeaveReportShow'])->middleware([TokenVerificationMiddleware::class]);
 Route::get('/eployeeLeaveReport',[LeaveReportController::class, 'eployeeLeaveReportShow'])->middleware([TokenVerificationMiddleware::class]);
 
 
@@ -71,22 +67,15 @@ Route::post('/leave-category-create', [LeaveCategoryController::class, 'leaveCat
 Route::post('/leave-category-update', [LeaveCategoryController::class, 'leaveCategoryUpdating'])->middleware([TokenVerificationMiddleware::class]);
 Route::post('/leave-category-delete', [LeaveCategoryController::class, 'leaveCategoryDeleting'])->middleware([TokenVerificationMiddleware::class]);
 
-// Leave Ajux API Route
+// Leave Ajax
 Route::get('/leave-list', [LeaveController::class, 'displayLeaveList'])->middleware([TokenVerificationMiddleware::class]);
 Route::post('/leave-create', [LeaveController::class, 'leaveCreation'])->middleware([TokenVerificationMiddleware::class]);
 
-
-
-// Leave update Ajux API Route
+// Leave update Ajax route
 Route::post('/leave-update', [ManagerController::class, 'leaveUpdateByManager'])->middleware([ManagerMiddleware::class]);
 Route::get('/managerPage', [ManagerController::class, 'managerPageShow'])->middleware([ManagerMiddleware::class]);
 Route::get('/leave-list-manager', [ManagerController::class, 'leaveListForManager'])->middleware([ManagerMiddleware::class]);
 Route::post('/leave-by-id', [ManagerController::class, 'showLeaveById'])->middleware([ManagerMiddleware::class]);
-
-
-
-// Route::get('/sabujLeave', [LeaveController::class, 'sabujLeave'])->middleware([TokenVerificationMiddleware::class]);
-
 
 Route::get('/available-leave-days', [LeaveReportController::class, 'calculateAvailableLeaveDays'])->middleware([TokenVerificationMiddleware::class]);
 
